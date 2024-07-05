@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TimelinePrompt from '../components/TimelinePrompt';
 import TimelineDisplay from '../components/TimelineDisplay';
+import config from '../config';  // Import the configuration
 
 const Timeline = () => {
   const [timeline, setTimeline] = useState(null);
@@ -10,7 +11,7 @@ const Timeline = () => {
   const fetchTimeline = async (prompt) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/get_timeline?user_prompt=${encodeURIComponent(prompt)}`);
+      const response = await fetch(`${config.apiBaseUrl}/get_timeline?user_prompt=${encodeURIComponent(prompt)}`);
       const data = await response.json();
       setTimeline(data);
     } catch (error) {
