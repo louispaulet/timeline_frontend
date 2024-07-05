@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { ClipLoader } from 'react-spinners';
 
-const TimelinePrompt = ({ onPromptSubmit }) => {
-  const [prompt, setPrompt] = useState('');
+const TimelinePrompt = ({ onPromptSubmit, initialPrompt, loading }) => {
+  const [prompt, setPrompt] = useState(initialPrompt || '');
   const textareaRef = useRef(null);
 
   const handleSubmit = (e) => {
@@ -23,6 +24,10 @@ const TimelinePrompt = ({ onPromptSubmit }) => {
     textarea.style.height = `${textarea.scrollHeight}px`;
   }, [prompt]);
 
+  useEffect(() => {
+    setPrompt(initialPrompt);
+  }, [initialPrompt]);
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center mt-8">
       <div className="flex flex-col items-center space-y-1">
@@ -36,13 +41,15 @@ const TimelinePrompt = ({ onPromptSubmit }) => {
             placeholder="Enter your timeline prompt"
             rows="1"
             style={{ minHeight: '3rem' }}
+            disabled={loading}
           />
           <button 
             type="submit" 
-            className="p-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition duration-300"
-            style={{ height: '3rem' }}
+            className={`p-3 bg-blue-600 text-white rounded-lg shadow transition duration-300 ${loading ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-blue-700'}`}
+            style={{ height: '3rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            disabled={loading}
           >
-            Get Timeline
+            {loading ? <ClipLoader size={24} color="#ffffff" /> : 'Get Timeline'}
           </button>
         </div>
         <p className="italic text-sm text-gray-500 text-center">tip: press ctrl+enter to send prompt</p>
