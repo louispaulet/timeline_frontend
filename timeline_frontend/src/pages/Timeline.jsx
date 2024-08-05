@@ -28,7 +28,7 @@ const Timeline = () => {
 
   return (
     <div className="container mx-auto mt-8 px-4 max-w-4xl">
-      <h1 className="text-5xl font-bold text-left text-blue-600 mb-4">Universal Timeline Generator</h1>
+      <h1 className="text-5xl font-bold text-left mb-4">Timeline Generator</h1>
       <p className="text-xl text-left text-gray-700 mb-8">
         Enter any topic, and this tool will generate a detailed timeline for you. Whether it's historical events, recipes, or personal biographies, get a clear and structured timeline instantly.
       </p>
